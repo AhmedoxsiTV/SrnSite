@@ -14,6 +14,9 @@
             font-size: 16px;
             margin: 5px;
         }
+        #codeSection {
+            display: none;
+        }
         #codeList {
             margin-top: 20px;
             list-style-type: none;
@@ -25,7 +28,7 @@
     <input type="text" id="password" placeholder="Şifrenizi girin" />
     <button onclick="verifyPassword()">Doğrula</button>
 
-    <div id="codeSection" style="display:none;">
+    <div id="codeSection">
         <h3>Kod Üretme ve Listeleme</h3>
         <button onclick="generateCode()">Kod Üret</button>
         <ul id="codeList"></ul>
