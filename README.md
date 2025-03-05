@@ -5,22 +5,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Panel</title>
+    <title>Kod Üretme ve Listeleme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        #codeList {
+            margin-top: 20px;
+            list-style-type: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Discord Yönetim Paneli</h1>
+    <h2>Şifreyi Girin</h2>
+    <input type="text" id="password" placeholder="Şifrenizi girin" />
+    <button onclick="verifyPassword()">Doğrula</button>
 
-    <h2>Kod Üret</h2>
-    <button>Yeni Kod Üret</button>
+    <div id="codeSection" style="display:none;">
+        <h3>Kod Üretme ve Listeleme</h3>
+        <button onclick="generateCode()">Kod Üret</button>
+        <ul id="codeList"></ul>
+    </div>
 
-    <h2>Mevcut Kodlar</h2>
-    <ul>
-        <li>Örnek Kod: ABCD123456</li>
-    </ul>
+    <script>
+        const validPassword = "263826Ayt";  // Şifreyi burada belirliyoruz
+        const codes = [];
 
-    <h2>Assetto Corsa</h2>
-    <label for="codeInput">Kod Gir:</label>
-    <input type="text" id="codeInput">
-    <button>Doğrula</button>
+        function verifyPassword() {
+            const enteredPassword = document.getElementById('password').value;
+            if (enteredPassword === validPassword) {
+                document.getElementById('codeSection').style.display = "block";
+                alert("Şifre doğrulandı! Artık kodları üretebilirsiniz.");
+            } else {
+                alert("Geçersiz şifre! Lütfen tekrar deneyin.");
+            }
+        }
+
+        function generateCode() {
+            const code = generateRandomCode();
+            codes.push(code);
+            displayCodes();
+        }
+
+        function generateRandomCode() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            const length = 10;
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                result += characters[randomIndex];
+            }
+            return result;
+        }
+
+        function displayCodes() {
+            const codeListElement = document.getElementById('codeList');
+            codeListElement.innerHTML = '';  // Önceki kodları temizle
+            codes.forEach(code => {
+                const li = document.createElement('li');
+                li.textContent = code;
+                codeListElement.appendChild(li);
+            });
+        }
+    </script>
 </body>
 </html>
